@@ -4,20 +4,8 @@ const defaultOptions = {
     isolateFirstArgForTimeoutError: true,
 };
 
-module.exports = function(timeout, callback, options) {
+function  timeoutCallback(callback, timeout = 10000, options = defaultOptions) {
   let called = false;
-
-  // Check to see if it's actually an options object.
-  if (typeof callback === "object"
-    && callback.hasOwnProperty("isolateFirstArgForTimeoutError")
-  ) {
-    options = callback;
-  }
-
-  if (typeof timeout === "function") {
-    callback = timeout;
-    timeout = 10 * 1000;
-  }
 
   options = { ...defaultOptions, ...options };
 
@@ -42,3 +30,5 @@ module.exports = function(timeout, callback, options) {
     callback(...args);
   };
 };
+
+export default timeoutCallback;
