@@ -3,7 +3,7 @@ declare module 'timeout-callback' {
     isolateFirstArgForTimeoutError: boolean,
   }
 
-  type Callback = <T extends unknown>(timeout: boolean | undefined, res: T | Error) => void;
+ export type Callback<T extends unknown> = (timeout: boolean | undefined, res: T | Error) => void;
 
   /* Kill the callback function at the end of the timeout. Default timeout: 10 seconds. */
  function timeoutCallback(callback: Callback, timeout?: number, options?: Options): Callback;
